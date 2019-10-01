@@ -12,41 +12,31 @@ namespace WindowsConsoleEngine
         {
             ScreenWriter.Initialize(100, 50);
 
-            var mapWidth = 50;
+            var mapWidth = 30;
             var mapHeight = 30;
 
-            Frame mapFrame = new Frame(0, 0, mapWidth, mapHeight, true, ConsoleColor.Blue);
+            Frame mapFrame = new Frame(10, 10, mapWidth, mapHeight, true, ConsoleColor.Red);
             
+            Frame robinFrame = new Frame(20,20,10,10,true, ConsoleColor.Red);
 
-            var decoratedMap = GenerateMap(mapWidth, mapHeight, 0.1f);
-            mapFrame.WriteCharacterArray(0,0, decoratedMap);
-
-            var rand = new Random();
-            Frame randomFrame = new Frame(52, 0, 10, 30, true, ConsoleColor.Red);
+            var decoratedMap = GenerateMap(mapWidth*5, mapHeight*5, 0.1f);
+           
             ScreenWriter.Refresh();
+
+            var x = 100;
 
             while (true)
             {
-                var randomCharArray = new DecoratedCharacter[10, 10];
-                for (int y = 0; y < 10; y++)
-                {
-                    for (int x = 0; x < 10; x++)
-                    {
-                        int num = rand.Next(0, 26); // Zero to 25
-                        char let = (char)('a' + num);
-                        randomCharArray[x, y] = new DecoratedCharacter(let, ConsoleColor.Green);
-                    }
-                }
+                x -= 1;
+                mapFrame.Redraw();
+                mapFrame.WriteCharacterArray(x, x, decoratedMap);
 
-                decoratedMap = GenerateMap(mapWidth, mapHeight, 0.1f);
-                mapFrame.WriteCharacterArray(0, 0, decoratedMap);
-
-                randomFrame.WriteCharacterArray(0, 0, randomCharArray);
+                robinFrame.Redraw();
+                robinFrame.WriteCharacter(5, 5, new DecoratedCharacter('R', ConsoleColor.Red));
 
                 ScreenWriter.Refresh();
-
+                Thread.Sleep(100);
             }
-
 
         }
 

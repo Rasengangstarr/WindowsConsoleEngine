@@ -47,6 +47,23 @@ namespace WindowsConsoleEngine
 
         }
 
+        public void Redraw()
+        {
+            _x--;
+            _y--;
+            _x2++;
+            _y2++;
+            WipeContents();
+            if (_hasBorder)
+            {
+                DrawBorder();
+            }
+            _x++;
+            _y++;
+            _x2--;
+            _y2--;
+        }
+
         public bool WriteCharacter(int x, int y, DecoratedCharacter character)
         {
             if (x > _width || y > _height)
@@ -61,16 +78,27 @@ namespace WindowsConsoleEngine
 
         public bool WriteCharacterArray(int x, int y, DecoratedCharacter[,] decoratedCharacters)
         {
-            if (decoratedCharacters.GetLength(0) > _width || decoratedCharacters.GetLength(1) > _height)
-            {
-                return false;
-            }
-
+           
             for (int yCount = 0; yCount < decoratedCharacters.GetLength(1); yCount++)
             {
                 for (int xCount = 0; xCount < decoratedCharacters.GetLength(0); xCount++)
                 {
-                    ScreenBuffer.UpdateCharacter(xCount+_x, yCount+_y, decoratedCharacters[xCount,yCount].Character, decoratedCharacters[xCount, yCount].ForegroundColor);
+                    if (xCount + _x < _x || xCount + _x > _x2 + 1 || yCount + _y < _y || yCount + _y > _y2 + 1 
+                        || xCount + x + _x < _x || yCount + y + _y + 1 < _y)
+                    {
+                        continue;
+                    }
+
+                    try
+                    {
+                        ScreenBuffer.UpdateCharacter(xCount + _x, yCount + _y,
+                            decoratedCharacters[xCount + x, yCount + y].Character,
+                            decoratedCharacters[xCount + x, yCount + y].ForegroundColor);
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        return false;
+                    }
                 }
             }
 

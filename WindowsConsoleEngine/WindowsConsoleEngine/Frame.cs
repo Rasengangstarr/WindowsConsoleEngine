@@ -97,7 +97,7 @@ namespace WindowsConsoleEngine
                     }
                     catch (IndexOutOfRangeException e)
                     {
-                        return false;
+                        continue;
                     }
                 }
             }

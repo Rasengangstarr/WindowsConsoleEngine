@@ -76,6 +76,24 @@ namespace WindowsConsoleEngine
             return true;
         }
 
+        public bool WriteString(int x, int y, string characters, ConsoleColor color)
+        {
+            if (x > _width || y > _height)
+            {
+                return false;
+            }
+
+
+            for (int i = 0; i < characters.Length; i++)
+            {
+                if (i + x > _width)
+                    return true;
+                ScreenBuffer.UpdateCharacter(_x + x + i, _y + y, characters[i], color);
+            }
+
+            return true;
+        }
+
         public bool WriteCharacterArray(int x, int y, DecoratedCharacter[,] decoratedCharacters)
         {
            

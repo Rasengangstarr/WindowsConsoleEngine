@@ -17,7 +17,7 @@ namespace WindowsConsoleEngine
 
             Frame mapFrame = new Frame(10, 10, mapWidth, mapHeight, true, ConsoleColor.Red);
             
-            Frame robinFrame = new Frame(20,20,10,10,true, ConsoleColor.Red);
+            Frame statsFrame = new Frame(20,20,30,5,true, ConsoleColor.Red);
 
             var decoratedMap = GenerateMap(mapWidth*5, mapHeight*5, 0.1f);
            
@@ -31,8 +31,12 @@ namespace WindowsConsoleEngine
                 mapFrame.Redraw();
                 mapFrame.WriteCharacterArray(x, x, decoratedMap);
 
-                robinFrame.Redraw();
-                robinFrame.WriteCharacter(5, 5, new DecoratedCharacter('R', ConsoleColor.Red));
+                statsFrame.Redraw();
+                statsFrame.WriteString(0, 0, "mapWidth = " + mapWidth * 5, ConsoleColor.Green);
+                statsFrame.WriteString(0, 1, "mapHeight = " + mapHeight * 5, ConsoleColor.Green);
+                statsFrame.WriteString(0, 2, "frameWidth = " + mapWidth , ConsoleColor.Green);
+                statsFrame.WriteString(0, 3, "frameHeight = " + mapHeight, ConsoleColor.Green);
+                statsFrame.WriteString(0, 4, "currentX = " + x, ConsoleColor.Blue);
 
                 ScreenWriter.Refresh();
                 Thread.Sleep(100);

@@ -96,7 +96,8 @@ namespace WindowsConsoleEngine
 
         public bool WriteCharacterArray(int x, int y, DecoratedCharacter[,] decoratedCharacters)
         {
-           
+            x = -x;
+            y = -y;
             for (int yCount = 0; yCount < decoratedCharacters.GetLength(1); yCount++)
             {
                 for (int xCount = 0; xCount < decoratedCharacters.GetLength(0); xCount++)

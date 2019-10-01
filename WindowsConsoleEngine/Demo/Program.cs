@@ -23,7 +23,7 @@ namespace WindowsConsoleEngine
            
             ScreenWriter.Refresh();
 
-            var x = 100;
+            var x = 0;
 
             while (true)
             {

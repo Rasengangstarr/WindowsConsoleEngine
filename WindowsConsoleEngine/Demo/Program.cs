@@ -32,11 +32,11 @@ namespace WindowsConsoleEngine
                 mapFrame.WriteCharacterArray(x, x, decoratedMap);
 
                 statsFrame.Redraw();
-                statsFrame.WriteString(0, 0, "mapWidth = " + mapWidth * 5, ConsoleColor.Green);
-                statsFrame.WriteString(0, 1, "mapHeight = " + mapHeight * 5, ConsoleColor.Green);
-                statsFrame.WriteString(0, 2, "frameWidth = " + mapWidth , ConsoleColor.Green);
-                statsFrame.WriteString(0, 3, "frameHeight = " + mapHeight, ConsoleColor.Green);
-                statsFrame.WriteString(0, 4, "currentX = " + x, ConsoleColor.Blue);
+                statsFrame.WriteString(0, 0, "mapWidth = " + mapWidth * 5, ConsoleColor.White);
+                statsFrame.WriteString(0, 1, "mapHeight = " + mapHeight * 5, ConsoleColor.Grey);
+                statsFrame.WriteString(0, 2, "frameWidth = " + mapWidth , ConsoleColor.Cyan);
+                statsFrame.WriteString(0, 3, "frameHeight = " + mapHeight, ConsoleColor.Blue);
+                statsFrame.WriteString(0, 4, "currentX = " + x, ConsoleColor.Red);
 
                 ScreenWriter.Refresh();
             }

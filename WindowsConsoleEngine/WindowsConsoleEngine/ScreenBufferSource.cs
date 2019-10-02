@@ -65,28 +65,13 @@ namespace WindowsConsoleEngine
             public short Bottom;
         }
 
-        public static void UpdateCharacter(int x, int y, char character, ConsoleColor foregroundColor = ConsoleColor.Empty,
-            ConsoleColor backgroundColor = ConsoleColor.Empty)
+        public static void UpdateCharacter(int x, int y, char character, ConsoleColor foregroundColor = ConsoleColor.White,
+            ConsoleColor backgroundColor = ConsoleColor.Black)
         {
-            switch (foregroundColor)
-            {
-                case ConsoleColor.Black:
-                    ScreenBufferSource[x, y].Attributes = 0;
-                    break;
-                case ConsoleColor.White:
-                    ScreenBufferSource[x, y].Attributes = 7;
-                    break;
-                case ConsoleColor.Red:
-                    ScreenBufferSource[x, y].Attributes = 4;
-                    break;
-                case ConsoleColor.Green:
-                    ScreenBufferSource[x, y].Attributes = 2;
-                    break;
-                case ConsoleColor.Blue:
-                    ScreenBufferSource[x, y].Attributes = 1;
-                    break;
-            }
-
+            
+            ScreenBufferSource[x, y].Attributes = (short)((short)foregroundColor | ((short)backgroundColor << 4));
+            
+            
 
             //TODO: implement background color bitshifting
 

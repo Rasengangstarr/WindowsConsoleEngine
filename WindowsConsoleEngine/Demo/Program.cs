@@ -39,7 +39,6 @@ namespace WindowsConsoleEngine
                 statsFrame.WriteString(0, 4, "currentX = " + x, ConsoleColor.Blue);
 
                 ScreenWriter.Refresh();
-                Thread.Sleep(100);
             }
 
         }

@@ -3,12 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsConsoleEngine", "WindowsConsoleEngine\WindowsConsoleEngine.csproj", "{3DE401CC-5F53-4F1C-964D-CE79E06E65CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsConsoleEngine", "WindowsConsoleEngine\WindowsConsoleEngine.csproj", "{3DE401CC-5F53-4F1C-964D-CE79E06E65CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{8350E2EF-73B2-4299-89D6-89154A1521FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo\Demo.csproj", "{8350E2EF-73B2-4299-89D6-89154A1521FF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3DE401CC-5F53-4F1C-964D-CE79E06E65CE} = {3DE401CC-5F53-4F1C-964D-CE79E06E65CE}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPS", "FPS\FPS.csproj", "{ED22ADA0-89E0-4273-849E-00D08FAAF882}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 		{8350E2EF-73B2-4299-89D6-89154A1521FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8350E2EF-73B2-4299-89D6-89154A1521FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8350E2EF-73B2-4299-89D6-89154A1521FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED22ADA0-89E0-4273-849E-00D08FAAF882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED22ADA0-89E0-4273-849E-00D08FAAF882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED22ADA0-89E0-4273-849E-00D08FAAF882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED22ADA0-89E0-4273-849E-00D08FAAF882}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

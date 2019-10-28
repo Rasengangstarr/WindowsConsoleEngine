@@ -10,35 +10,63 @@ namespace WindowsConsoleEngine
     {
         static void Main(string[] args)
         {
-            ScreenWriter.Initialize(100, 50);
+            ScreenWriter.Initialize(110, 52);
 
-            var mapWidth = 30;
-            var mapHeight = 30;
+            var mapWidth = 50;
+            var mapHeight = 50;
 
-            Frame mapFrame = new Frame(10, 10, mapWidth, mapHeight, true, ConsoleColor.Red);
+            Frame mapFrame = new Frame(0, 0, mapWidth, mapHeight, true, ConsoleColor.Red);
             
-            Frame statsFrame = new Frame(20,20,30,5,true, ConsoleColor.Red);
+            Frame statsFrame = new Frame(52,12,30,5,true, ConsoleColor.Red);
 
-            var decoratedMap = GenerateMap(mapWidth*5, mapHeight*5, 0.1f);
-           
+            Frame miniMapFrame = new Frame(52, 0, 10, 10, true, ConsoleColor.Red);
+
+            var decoratedMap = GenerateMap(mapWidth * 5, mapHeight * 5, 0.01f );
+            var decoratedMiniMap = GenerateMap(10, 10, 0.01f * (mapWidth * 5f) / 10);
+
             ScreenWriter.Refresh();
 
             var x = 0;
+            var y = 0;
 
             while (true)
             {
-                x -= 1;
+                var input = Console.KeyAvailable ? Console.ReadKey() : new ConsoleKeyInfo();
+
+                if (input.Key == ConsoleKey.DownArrow && y > -mapHeight * 4)
+                {
+                    y -= 1;
+                }
+                else if (input.Key == ConsoleKey.UpArrow && y <= 0)
+                {
+                    y += 1;
+                }
+                else if (input.Key == ConsoleKey.LeftArrow && x < mapWidth * 5)
+                {
+                    x += 1;
+                }
+                else if (input.Key == ConsoleKey.RightArrow && x > 0)
+                {
+                    x -= 1;
+                }
+
                 mapFrame.Redraw();
-                mapFrame.WriteCharacterArray(x, x, decoratedMap);
+                mapFrame.WriteCharacterArray(x, y, decoratedMap);
 
                 statsFrame.Redraw();
                 statsFrame.WriteString(0, 0, "mapWidth = " + mapWidth * 5, ConsoleColor.White);
                 statsFrame.WriteString(0, 1, "mapHeight = " + mapHeight * 5, ConsoleColor.Grey);
-                statsFrame.WriteString(0, 2, "frameWidth = " + mapWidth , ConsoleColor.Cyan);
+                statsFrame.WriteString(0, 2, "frameWidth = " + mapWidth, ConsoleColor.Cyan);
                 statsFrame.WriteString(0, 3, "frameHeight = " + mapHeight, ConsoleColor.Blue);
                 statsFrame.WriteString(0, 4, "currentX = " + x, ConsoleColor.Red);
 
+                miniMapFrame.WriteCharacterArray(0, 0, decoratedMiniMap);
+                miniMapFrame.WriteCharacter((int)Math.Floor(((float)(-x+(mapWidth/2f)) / (float)mapWidth) * 2) - 1,
+                    (int)Math.Floor(((float)(-y + (mapHeight / 2f)) / (float)mapHeight) * 2) -1,
+                    new DecoratedCharacter(' ', ConsoleColor.Black, ConsoleColor.White));
+
                 ScreenWriter.Refresh();
+                
             }
 
         }
@@ -55,10 +83,19 @@ namespace WindowsConsoleEngine
             {
                 for (int mapX = 0; mapX < width; mapX++)
                 {
-                    if (map[mapX, mapY] == 0)
-                        mapDecorated[mapX, mapY] = new DecoratedCharacter('X', ConsoleColor.Blue);
-                    else
-                        mapDecorated[mapX, mapY] = new DecoratedCharacter('O', ConsoleColor.Red);
+                    if (map[mapX, mapY] < 0.2)
+                        mapDecorated[mapX, mapY] = new DecoratedCharacter(' ', ConsoleColor.Black, ConsoleColor.DarkCyan);
+                    else if (map[mapX, mapY] < 0.3)
+                        mapDecorated[mapX, mapY] = new DecoratedCharacter(' ', ConsoleColor.Black, ConsoleColor.Cyan);
+                    else if (map[mapX, mapY] < 0.35)
+                        mapDecorated[mapX, mapY] = new DecoratedCharacter(' ', ConsoleColor.Black, ConsoleColor.DarkYellow);
+                    else if (map[mapX, mapY] < 0.8)
+                        mapDecorated[mapX, mapY] = new DecoratedCharacter(' ', ConsoleColor.Black, ConsoleColor.Green);
+                    else if (map[mapX, mapY] < 0.8)
+                        mapDecorated[mapX, mapY] = new DecoratedCharacter(' ', ConsoleColor.Black, ConsoleColor.DarkGreen);
+                    else 
+                        mapDecorated[mapX, mapY] = new DecoratedCharacter(' ', ConsoleColor.Black, ConsoleColor.Grey);
+
                 }
             }
 

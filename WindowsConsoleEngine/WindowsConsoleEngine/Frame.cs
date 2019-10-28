@@ -66,12 +66,13 @@ namespace WindowsConsoleEngine
 
         public bool WriteCharacter(int x, int y, DecoratedCharacter character)
         {
+            
             if (x > _width || y > _height)
             {
                 return false;
             }
 
-            ScreenBuffer.UpdateCharacter(_x + x, _y + y, character.Character, character.ForegroundColor);
+            ScreenBuffer.UpdateCharacter(_x + x, _y + y, character.Character, character.ForegroundColor, character.BackgroundColor);
             
             return true;
         }
@@ -110,9 +111,13 @@ namespace WindowsConsoleEngine
 
                     try
                     {
+                        if (decoratedCharacters[xCount + x, yCount + y] == null)
+                        {
+                            decoratedCharacters[xCount + x, yCount + y] = new DecoratedCharacter(' ', ConsoleColor.White, ConsoleColor.Black);
+                        }
                         ScreenBuffer.UpdateCharacter(xCount + _x, yCount + _y,
                             decoratedCharacters[xCount + x, yCount + y].Character,
-                            decoratedCharacters[xCount + x, yCount + y].ForegroundColor);
+                            decoratedCharacters[xCount + x, yCount + y].ForegroundColor, decoratedCharacters[xCount + x, yCount + y].BackgroundColor);
                     }
                     catch (IndexOutOfRangeException e)
                     {
